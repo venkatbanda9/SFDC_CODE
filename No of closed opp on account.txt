@@ -1,0 +1,30 @@
+No.of closed opp on account.
+
+trigger t1 on Opportunity(after update, after insert){
+
+	//Trigger.OperationType
+	
+	switch on Trigger.OperationType{
+	
+	when on AFTER_UPDATE{
+	
+				set<id> accIds  = new set<id>();
+				for(Opportunity opp: Trigger.New){
+				
+					accIds.add(opp.AccountId);
+				}
+
+				List<Account> accList =[SELECT id, name, NumberofClosedOPP,(Select id, name from Opportunity where status='closed') from Accounts where id IN:accIds];
+				
+				for (Account a1: accList){
+				
+					a1.NumberofClosedOPP = a1.Opportunity.size();
+				
+				}
+				
+				update accList;
+	}
+	
+	
+	//if(Trigger.isAfter && Trigger.isUpdate){}
+}

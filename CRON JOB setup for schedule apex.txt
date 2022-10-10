@@ -1,0 +1,14 @@
+List<String> nameList = new List<String>();
+
+for(Company__c eachObj : CompanyList){
+	nameList.add(nameList.name__c);
+}
+
+List<String> industryList = new List<String>();
+
+industryList = [SELECT Industry FROM Account WHERE name__c IN:=nameList];
+
+
+0 0 0 * * *
+
+0 0 23 ? 5 2022

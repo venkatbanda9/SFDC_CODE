@@ -1,0 +1,39 @@
+Trigger to update account Phone field when Contact Phone field is updated
+
+
+1. first get the contactList Ids so that we can query which parent accounts can be updated.
+2. Query what has to get updated
+
+public class AC {
+
+	public static void MN(List<Contact> conList){
+	
+		Set<Id> accIdSet = new Set<Id>();
+		
+		for (Contact con: conList){
+		
+			accIdSet.add(con.AccountId);
+		}
+		
+		List<Account> accList=[select Id,Name,PhoneNumber,(select id, PhoneNumber.AccountId from Contacts) from Accounts where Id IN:accIdSet];
+		
+		
+		for(Account a1: accList){
+		
+			for(Contact c1: a1.Contacts){
+			
+				if(c1.PhoneNumber!=null){
+				
+					a1.Phone = c1.Phone;
+					
+				}
+				
+			}
+		
+		}
+		update accList;
+	
+	}
+	
+	
+}

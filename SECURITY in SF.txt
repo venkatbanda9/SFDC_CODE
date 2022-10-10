@@ -1,0 +1,27 @@
+Security in Salesforce:
+
+1. OWD
+2. Profile
+3. Permission Set
+4. Role
+5. 
+
+
+WFR pending:
+
+========== Videos ==========
+12 May vided:https://youtu.be/MbEUImreH80
+Workflow Rules In Salesforce(No live
+learning needed for this topic,as this is non
+imp topic.And Flows are going to used
+instead of WFR in future)
+Work Flow Videos:
+WFR1:
+https://youtu.be/VzsfSvLyzE4
+WFR2:
+https://youtu.be/aAQKIv17BqY
+WFR3:
+https://youtu.be/q011T7sFITO
+WFR4:
+https://youtu.be/YF-MHMpozAc
+  ======== Intelogik's Project Problems =========

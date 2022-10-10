@@ -1,0 +1,36 @@
+global class BCls implements Database.Batchable<sObject>{
+	
+	global Database.QueryLocator start(Database.BatchableContext BC){
+	
+		string qry = '';
+		return Database.getQueryLocator(query);
+	}
+	
+	global void execute(Database.BatchableContext BC, List<ObjAPINAME> scope){
+	
+		//process data using scope(Collection)
+	
+	}
+	
+	global void finish(){
+	
+		//some signature work like sending mails, sms, calling another batch class
+	
+	}
+
+
+}
+
+
+===========================================================================
+
+global class Sclass implements Schedulable{
+
+	global void execute(){
+	
+		//create object of Batch class
+		database.executeBatch(objref, 200);
+	
+	}
+
+}

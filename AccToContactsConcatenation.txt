@@ -1,0 +1,48 @@
+Account-Text field
+ContactNames-concatenated
+
+Trigger t1 on Contact(after insert, after update){
+
+//switch on Trigger.operationType
+ApexHelper.updateAccount(Trigger.New);
+
+}
+
+public class ApexHelper {
+
+
+ public static void updateAccount(List<Contact> cList){
+ 
+	set<id> accIds = new set<id>();
+	
+	for(Contact c1: cList){
+	
+		accIds.add(c1.AccountId);
+	
+	}
+	
+	List<Account> accList = new List<Account>();
+	
+	accList = [select Id, Name, ContactList,(select id, Name from Contact) from Accounts where id IN:accIds];
+	
+	for(Account a1: accList){
+			String concatenatedName = '';
+			for(Contact c1: a1.Contacts){
+			
+				
+				
+				concatenatedName = concatenatedName+c1.Name;
+				
+				
+				a1.ContactList = concatenatedName;
+				
+			}
+			
+		}
+		
+		update accList;
+ 
+ }
+
+}
+

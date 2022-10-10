@@ -1,0 +1,5 @@
+1. get a set and put all 'parent record ids
+2. build relationship query from parent to child with fields to udate
+3. create new list to update
+4. use for each nested twice for parent and then child records and update records.
+inset/update

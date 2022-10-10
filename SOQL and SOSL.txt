@@ -1,0 +1,20 @@
+===========================
+SOQL AND SOSL
+===========================
+
+
+Select Name, Salary__c from Employee__c where Salary__c>1000
+
+Select max(Salary__c) from Employee__c
+
+Select avg(Salary__c) from Employee__c
+
+
+SELECT FN, LN from <OBJECT> where lastname__c="Reddy"
+
+select Acc__c, industry__c, rating__c where industry__c = 'Banking' OR rating__c = 'hot'
+
+Select fields from Contact where LN__c like '_eddy' OR FN__c like 'Sh%'
+
+Select OwnerId, Name, AccountNumber from Account where (Industry='Finance' AND NumberOfEmployees>1000 AND Rating='Hot') OR (Website like '%.com' AND Industry='Finance')
+

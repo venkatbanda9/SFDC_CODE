@@ -1,0 +1,157 @@
+//Variable declaration
+double VarNum1;
+double VarNum2;
+double VarSubtraction;
+double VarDivision;
+
+//Variable initialization 
+VarNum1 = 10;
+VarNum2 = 5;
+
+//Business Logic 
+VarSubtraction = VarNum1 - VarNum2;
+VarDivision = VarNum1/VarNum2;
+
+//Subtraction will be printed.
+system.debug('Subtraction of ' + VarNum1 + ' and ' + VarNum2 + ' is: ' + VarSubtraction);
+
+//Division will be printed.
+system.debug('Division of ' + VarNum1 + ' with ' + VarNum2 + ' is: ' + VarDivision);
+
+//Print Thank you
+system.debug('Thank You');
+
+=====================
+
+if(VarAge >= 18){
+	system.debug('Congrats...You can Vote!')
+	}
+else{
+	system.debug('Sorry, You cannot Vote!')
+}
+
+===================
+ 
+ 
+ map<string, integer> map1 = new map<string, integer>();
+
+system.debug('map is : ' + map1);
+
+map1.put('iphone11', 68000);
+map1.put('iphone12', 70000);
+map1.put('iphone13', 78000);
+
+system.debug('map is : ' + map1);
+
+map1.clear();
+
+system.debug('map is : ' + map1);
+
+map1.put('iphone11', 68000);
+map1.put('iphone12', 70000);
+map1.put('iphone13', 78000);
+
+integer mapSize = map1.size();
+
+system.debug('map size is: ' + mapSize);
+
+integer iPhone11Value = map1.get('iphone11');
+
+system.debug('iphone11 price is: ' + iphone11Value);
+ 
+ 
+=============================
+
+//Variable declaration
+double VarNum1;
+double VarNum2;
+double VarSubtraction;
+double VarDivision;
+
+//Variable initialization 
+VarNum1 = 10;
+VarNum2 = 5;
+
+//Business Logic 
+VarSubtraction = VarNum1 - VarNum2;
+VarDivision = VarNum1/VarNum2;
+
+//Subtraction will be printed.
+system.debug('Subtraction of ' + VarNum1 + ' and ' + VarNum2 + ' is: ' + VarSubtraction);
+
+//Division will be printed.
+system.debug('Division of ' + VarNum1 + ' with ' + VarNum2 + ' is: ' + VarDivision);
+
+integer VarCounter = 1;
+
+while(VarCounter <= 2){
+    //Print Thank you
+	
+    system.debug('Thank You'+VarCounter+' using while loop');
+    VarCounter++;
+    
+}
+integer j=1;
+for (integer i=50; i >=31; i--){
+    system.debug('Thank You '+j+' using FOR loop');
+    j++;
+}
+
+
+
+=============================
+
+APEX CLASS:
+public class PropertyDiscount {
+	
+    public static void applyDiscount(list<Property__c> varPropList){
+        
+        for(Property__c varP: varPropList){
+            
+            if(varP.Type__c == 'Row House'){
+               
+                varP.Price__c = varP.Price__c - (0.05*varP.Price__c);
+            }
+        }
+    }
+}
+
+
+
+APEX TRIGGER:
+trigger PropertyDiscount on Property__c (before insert) {
+
+    PropertyDiscount.applyDiscount(Trigger.new);
+}
+
+
+if(Trigger.isInsert == true && Trigger.isBefore == true){
+	call function A;
+}
+if(Trigger.isUpdate == true && Trigger.isBefore == true){
+	call function B;
+}
+if(Trigger.isInsert == true && Trigger.isAfter == true){
+	call function C;
+}
+if(Trigger.isUpdate == true && Trigger.isAfter == true){
+	call function D;
+}
+
+
+public class PropertyDiscountTest {
+
+    static void TestFn(){
+        
+        Property__c VarP1 = new Property__c;
+        VarP1.Type__c = 'Row House';
+        VarP1.Price__c = 10000;
+        
+        insert VarP1;
+        
+        Property__c VarP2 = new Property__c;
+        VarP2 = [select Price__c from Property__c where id = VarP1.Id];
+        
+        System.assertEquals(9500, VarP2.Price__c);
+        
+    } 

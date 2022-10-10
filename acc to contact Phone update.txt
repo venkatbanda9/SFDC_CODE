@@ -1,0 +1,43 @@
+acc to contact Phone update:
+
+1. get parent id list
+2. write relationship query and get embedded list
+3. write nested for loops and update
+
+class{
+
+	method(List<Account> accList){
+		
+		set<Id> accIdSet = new set<Id>();
+		for(Account c1: accList){
+		
+			accIdSet.add(c1.Id);
+		
+		}
+		
+		List<Account> accListToCheck = [select id, phone, (select id, Phone, AccountId from Contact)from Accounts where id IN:accIdSet];
+		
+		List<Contact> updateConList = new List<Contact>();
+		
+		for(Account a1: accListToCheck){
+		
+			for(Contact c1: a1.Contacts){
+			
+				if(a1.Phone!=null){
+				
+					c1.Phone = a1.Phone;
+					updateConList.add(c1);
+				
+				}
+			}
+		}
+		database.insert(updateConList, false);
+	
+	
+	
+	}
+
+
+
+
+}

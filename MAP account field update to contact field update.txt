@@ -1,0 +1,41 @@
+================================================
+account field update to contact field update:
+================================================
+
+1-Account
+2-Contact
+
+Trigger AccountUpdate on Account(after update){
+
+	AC.MN(Trigger.New);
+
+}
+
+public class AC {
+
+	public static void MN(List<Account> accList){
+		
+		set<Id> setAccIds = new set<Id>();
+		for(Account acc: accList){
+			
+			setAccIds.add(acc.Id);
+		}
+	
+	//list of ontacts to update
+	List<Contacts> conList = new List<Contacts>([SELECT Id, accountId, Email from Contact where accountId in := setAccIds]);
+	
+	Map<Id, Account> accMap = new Map<Id, Account>([SELECT Id, Email from Account where id in := setAccIds]);
+	
+	for(Contact con: conList){
+	
+		if(con.accountId === accMap.get(con.accountId).id){
+			con.Email = accMap.get(con.accountId).Email;
+			
+		}
+		
+	}
+	
+	update conList;
+
+	}
+}

@@ -1,0 +1,52 @@
+Create the number of contacts which are equal to the number which we will enter in the Number of Locations field on the Account Object.
+
+
+=======================================================
+
+Trigger t1 on Account(after insert){
+
+	ContactCreationApex.createContacts(Trigger.New);
+}
+
+public class ContactCreationApex {
+
+ public static void createContacts(list<Account> accList)
+ {
+	integer n;
+	for(Account acc: accList){
+		n = acc.NumberOfLocations;
+	
+ }
+  List<Contact> conNew = new List<Contact>();
+  
+ for (integer i=1; i<=n; i++){
+ 
+	Contact accNewSingle = new Contact();
+	accNewSingle.Name = "Contact"+i;
+	//other mandatory fiels
+	conNew.add(accNewSingle);
+ }
+ 
+ database.insert(conNew);
+
+trigger ContactsCreation on Account (after insert) {
+list<contact> listContact = new list<contact>();
+map<id,decimal> mapAcc = new map<id,decimal>();
+  for(Account acc:trigger.new){
+      mapAcc.put(acc.id,acc.NumberofLocations__c);
+     }
+        if(mapAcc.size()>0 && mapAcc!=null){
+            for(Id accId:mapAcc.keyset()){
+               for(integer i=0;i<mapAcc.get(accId);i++){
+                 contact newContact=new contact();
+                 newContact.accountid=accId;
+                 newContact.lastname='contact'+i;
+                 listContact.add(newContact);
+                 }
+              }
+         }
+if(listContact.size()>0 && listContact!=null)
+insert listContact;
+
+
+}
